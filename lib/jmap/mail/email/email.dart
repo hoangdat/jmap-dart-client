@@ -86,18 +86,11 @@ class Email with EquatableMixin {
       const EmailIdConverter().fromJson(json['id'] as String),
       blobId: const IdNullableConverter().fromJson(json['blobId'] as String?),
       threadId: const ThreadIdNullableConverter().fromJson(json['threadId'] as String?),
-      mailboxIds: json['mailboxIds'] == null
-          ? null
-          : (json['mailboxIds'] as Map<String, dynamic>)
-              .map((key, value) => EmailMailboxIdsConverter().parseEntry(key, value)),
-      keywords: json['keywords'] == null
-          ? null
-          : (json['keywords'] as Map<String, dynamic>).map((key, value) => EmailKeywordIdentifierConverter().parseEntry(key, value)),
+      mailboxIds: (json['mailboxIds'] as Map<String, dynamic>?)?.map((key, value) => EmailMailboxIdsConverter().parseEntry(key, value)),
+      keywords: (json['keywords'] as Map<String, dynamic>?)?.map((key, value) => EmailKeywordIdentifierConverter().parseEntry(key, value)),
       size: const UnsignedIntNullableConverter().fromJson(json['size'] as int?),
       receivedAt: const UTCDateNullableConverter().fromJson(json['receivedAt'] as String?),
-      headers: json['headers'] == null
-          ? null
-          : (json['headers'] as List<dynamic>).map((json) => EmailHeader.fromJson(json)).toSet(),
+      headers: (json['headers'] as List<dynamic>?)?.map((json) => EmailHeader.fromJson(json)).toSet(),
       messageId: json['messageId'] == null
           ? null
           : const MessageIdsHeaderValueConverter().fromJson((json['messageId'] as List<dynamic>)),
@@ -111,39 +104,19 @@ class Email with EquatableMixin {
       sentAt: const UTCDateNullableConverter().fromJson(json['sentAt'] as String?),
       hasAttachment: json['hasAttachment'] as bool?,
       preview: json['preview'] as String?,
-      sender: json['sender'] == null
-          ? null
-          : (json['sender'] as List<dynamic>).map((json) => EmailAddress.fromJson(json)).toSet(),
-      from: json['from'] == null
-          ? null
-          : (json['from'] as List<dynamic>).map((json) => EmailAddress.fromJson(json)).toSet(),
-      to: json['to'] == null
-          ? null
-          : (json['to'] as List<dynamic>).map((json) => EmailAddress.fromJson(json)).toSet(),
-      cc: json['cc'] == null
-          ? null
-          : (json['cc'] as List<dynamic>).map((json) => EmailAddress.fromJson(json)).toSet(),
-      bcc: json['bcc'] == null
-          ? null
-          : (json['bcc'] as List<dynamic>).map((json) => EmailAddress.fromJson(json)).toSet(),
-      replyTo: json['replyTo'] == null
-          ? null
-          : (json['replyTo'] as List<dynamic>).map((json) => EmailAddress.fromJson(json)).toSet(),
-      textBody: json['textBody'] == null
-          ? null
-          : (json['textBody'] as List<dynamic>).map((json) => EmailBodyPart.fromJson(json)).toSet(),
-      htmlBody: json['htmlBody'] == null
-          ? null
-          : (json['htmlBody'] as List<dynamic>).map((json) => EmailBodyPart.fromJson(json)).toSet(),
-      attachments: json['attachments'] == null
-          ? null
-          : (json['attachments'] as List<dynamic>).map((json) => EmailBodyPart.fromJson(json)).toSet(),
+      sender: (json['sender'] as List<dynamic>?)?.map((json) => EmailAddress.fromJson(json)).toSet(),
+      from: (json['from'] as List<dynamic>?)?.map((json) => EmailAddress.fromJson(json)).toSet(),
+      to: (json['to'] as List<dynamic>?)?.map((json) => EmailAddress.fromJson(json)).toSet(),
+      cc: (json['cc'] as List<dynamic>?)?.map((json) => EmailAddress.fromJson(json)).toSet(),
+      bcc: (json['bcc'] as List<dynamic>?)?.map((json) => EmailAddress.fromJson(json)).toSet(),
+      replyTo: (json['replyTo'] as List<dynamic>?)?.map((json) => EmailAddress.fromJson(json)).toSet(),
+      textBody: (json['textBody'] as List<dynamic>?)?.map((json) => EmailBodyPart.fromJson(json)).toSet(),
+      htmlBody: (json['htmlBody'] as List<dynamic>?)?.map((json) => EmailBodyPart.fromJson(json)).toSet(),
+      attachments: (json['attachments'] as List<dynamic>?)?.map((json) => EmailBodyPart.fromJson(json)).toSet(),
       bodyStructure: json['bodyStructure'] == null
           ? null
           : EmailBodyPart.fromJson(json['bodyStructure'] as Map<String, dynamic>),
-      bodyValues: json['bodyValues'] == null
-          ? null
-          : (json['bodyValues'] as Map<String, dynamic>).map((key, value) => EmailBodyValueConverter().parseEntry(key, value)),
+      bodyValues: (json['bodyValues'] as Map<String, dynamic>?)?.map((key, value) => EmailBodyValueConverter().parseEntry(key, value)),
     );
   }
 

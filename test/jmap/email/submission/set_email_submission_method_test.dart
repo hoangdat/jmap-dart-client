@@ -214,7 +214,8 @@ void main() {
 
       final setEmailUpdateResponse = response.parse<SetEmailResponse>(
           setEmailSubmissionInvocation.methodCallId,
-          SetEmailResponse.deserialize);
+          SetEmailResponse.deserialize,
+          methodName: setEmailInvocation.methodName);
 
       expect(setEmailResponse?.created?[Id('dab1234')],
           equals(expectedCreated));

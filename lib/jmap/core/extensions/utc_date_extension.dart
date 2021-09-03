@@ -7,6 +7,6 @@ extension UTCDateExtension on UTCDate? {
     if (this != null && utcDate != null) {
       return this!.value.compareToSort(utcDate.value, isAscending ?? false);
     }
-    return 0;
+    return -1;
   }
 }

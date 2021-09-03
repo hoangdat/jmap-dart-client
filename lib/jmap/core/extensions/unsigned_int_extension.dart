@@ -7,6 +7,6 @@ extension UnsignedIntExtension on UnsignedInt? {
     if (this != null && unsignedInt != null) {
       return this!.value.compareToSort(unsignedInt.value, isAscending);
     }
-    return 0;
+    return -1;
   }
 }

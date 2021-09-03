@@ -4,6 +4,6 @@ extension StringExtension on String? {
     if (this != null && value != null) {
       return this!.toLowerCase().compareTo(value.toLowerCase()) * (isAscending == true ? 1 : -1);
     }
-    return 0;
+    return -1;
   }
 }

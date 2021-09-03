@@ -1,14 +1,15 @@
 
 import 'package:jmap_dart_client/http/converter/account_id_converter.dart';
 import 'package:jmap_dart_client/http/converter/id_converter.dart';
-import 'package:jmap_dart_client/http/converter/reference_id_converter.dart';
+import 'package:jmap_dart_client/http/converter/reference_email_submission_id_converter.dart';
 import 'package:jmap_dart_client/http/converter/set/set_method_properties_converter.dart';
 import 'package:jmap_dart_client/jmap/account_id.dart';
 import 'package:jmap_dart_client/jmap/core/capability/capability_identifier.dart';
 import 'package:jmap_dart_client/jmap/core/method/request/set_method.dart';
-import 'package:jmap_dart_client/jmap/core/reference_id.dart';
+import 'package:jmap_dart_client/jmap/core/patch_object.dart';
 import 'package:jmap_dart_client/jmap/core/request/request_invocation.dart';
 import 'package:jmap_dart_client/jmap/mail/email/submission/email_submission.dart';
+import 'package:jmap_dart_client/jmap/mail/email/submission/reference_email_submission_id.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 class SetEmailSubmissionMethod extends SetMethod<EmailSubmission> with OptionalOnSuccessUpdateEmail, OptionalOnSuccessDestroyEmail  {
@@ -48,9 +49,9 @@ class SetEmailSubmissionMethod extends SetMethod<EmailSubmission> with OptionalO
         .toJson(destroyId)).toList());
     writeNotNull('onSuccessUpdateEmail', onSuccessUpdateEmail
         ?.map((id, update) => SetMethodPropertiesConverter()
-        .fromMapReferenceIdToJson(id, update)));
+        .fromMapReferenceEmailSubmissionIdToJson(id, update)));
     writeNotNull('onSuccessDestroyEmail', onSuccessDestroyEmail
-        ?.map((destroyId) => ReferenceIdConverter()
+        ?.map((destroyId) => ReferenceEmailSubmissionIdConverter()
         .toJson(destroyId)).toList());
 
     return val;
@@ -62,11 +63,11 @@ class SetEmailSubmissionMethod extends SetMethod<EmailSubmission> with OptionalO
 
 mixin OptionalOnSuccessUpdateEmail {
   @JsonKey(includeIfNull: false)
-  Map<ReferenceId, Map<String, dynamic>>? onSuccessUpdateEmail;
+  Map<ReferenceEmailSubmissionId, PatchObject>? onSuccessUpdateEmail;
 
-  void addOnSuccessUpdateEmail(Map<ReferenceId, Map<String, dynamic>> values) {
+  void addOnSuccessUpdateEmail(Map<ReferenceEmailSubmissionId, PatchObject> values) {
     if (onSuccessUpdateEmail == null) {
-      onSuccessUpdateEmail = Map<ReferenceId, Map<String, dynamic>>();
+      onSuccessUpdateEmail = Map<ReferenceEmailSubmissionId, PatchObject>();
     }
     onSuccessUpdateEmail?.addAll(values);
   }
@@ -74,9 +75,9 @@ mixin OptionalOnSuccessUpdateEmail {
 
 mixin OptionalOnSuccessDestroyEmail {
   @JsonKey(includeIfNull: false)
-  Set<ReferenceId>? onSuccessDestroyEmail;
+  Set<ReferenceEmailSubmissionId>? onSuccessDestroyEmail;
 
-  void addOnSuccessDestroyEmail(Set<ReferenceId> values) {
+  void addOnSuccessDestroyEmail(Set<ReferenceEmailSubmissionId> values) {
     if (onSuccessDestroyEmail == null) {
       onSuccessDestroyEmail = Set();
     }

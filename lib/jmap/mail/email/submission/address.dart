@@ -6,9 +6,10 @@ part 'address.g.dart';
 @JsonSerializable()
 class Address with EquatableMixin {
   final String email;
+  @JsonKey(includeIfNull: false)
   final Object? parameters;
 
-  Address(this.email, this.parameters);
+  Address(this.email, {this.parameters});
 
   factory Address.fromJson(Map<String, dynamic> json) => _$AddressFromJson(json);
 

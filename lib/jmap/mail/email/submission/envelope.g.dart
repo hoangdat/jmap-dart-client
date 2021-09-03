@@ -17,5 +17,5 @@ Envelope _$EnvelopeFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$EnvelopeToJson(Envelope instance) => <String, dynamic>{
       'mailFrom': instance.mailFrom.toJson(),
-      'rcptTo': instance.rcptTo.map((address) => address.toJson()).toList(),
+      'rcptTo': instance.rcptTo.map((e) => e.toJson()).toList(),
     };

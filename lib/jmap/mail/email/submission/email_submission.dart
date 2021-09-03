@@ -1,21 +1,24 @@
 import 'package:equatable/equatable.dart';
 import 'package:jmap_dart_client/http/converter/delivery_status_converter.dart';
-import 'package:jmap_dart_client/http/converter/email_id_nullable_converter.dart';
+import 'package:jmap_dart_client/http/converter/email_submission_id_nullable_converter.dart';
 import 'package:jmap_dart_client/http/converter/id_converter.dart';
 import 'package:jmap_dart_client/http/converter/id_nullable_converter.dart';
+import 'package:jmap_dart_client/http/converter/reference_email_id_nullable_converter.dart';
 import 'package:jmap_dart_client/http/converter/thread_id_nullable_converter.dart';
 import 'package:jmap_dart_client/http/converter/undo_status_nullable_converter.dart';
 import 'package:jmap_dart_client/http/converter/utc_date_nullable_converter.dart';
 import 'package:jmap_dart_client/jmap/core/id.dart';
 import 'package:jmap_dart_client/jmap/core/utc_date.dart';
 import 'package:jmap_dart_client/jmap/mail/email/email.dart';
+import 'package:jmap_dart_client/jmap/mail/email/reference_email_id.dart';
 import 'package:jmap_dart_client/jmap/mail/email/submission/delivery_status.dart';
+import 'package:jmap_dart_client/jmap/mail/email/submission/email_submission_id.dart';
 import 'package:jmap_dart_client/jmap/mail/email/submission/envelope.dart';
 
 class EmailSubmission with EquatableMixin {
-  final Id? id;
+  final EmailSubmissionId? id;
   final Id? identityId;
-  final EmailId? emailId;
+  final ReferenceEmailId? emailId;
   final ThreadId? threadId;
   final Envelope? envelope;
   final UTCDate? sendAt;
@@ -39,9 +42,9 @@ class EmailSubmission with EquatableMixin {
 
   factory EmailSubmission.fromJson(Map<String, dynamic> json) {
     return EmailSubmission(
-      id: const IdNullableConverter().fromJson(json['id'] as String?),
+      id: const EmailSubmissionIdNullableConverter().fromJson(json['id'] as String?),
       identityId: const IdNullableConverter().fromJson(json['identityId'] as String?),
-      emailId: const EmailIdNullableConverter().fromJson(json['emailId'] as String?),
+      emailId: const ReferenceEmailIdNullableConverter().fromJson(json['emailId'] as String?),
       threadId: const ThreadIdNullableConverter().fromJson(json['threadId'] as String?),
       envelope: json['envelope'] == null
           ? null
@@ -66,9 +69,9 @@ class EmailSubmission with EquatableMixin {
       }
     }
 
-    writeNotNull('id', const IdNullableConverter().toJson(id));
+    writeNotNull('id', const EmailSubmissionIdNullableConverter().toJson(id));
     writeNotNull('identityId', const IdNullableConverter().toJson(identityId));
-    writeNotNull('emailId', const EmailIdNullableConverter().toJson(emailId));
+    writeNotNull('emailId', const ReferenceEmailIdNullableConverter().toJson(emailId));
     writeNotNull('threadId', const ThreadIdNullableConverter().toJson(threadId));
     writeNotNull('envelope', envelope?.toJson());
     writeNotNull('sendAt', const UTCDateNullableConverter().toJson(sendAt));
